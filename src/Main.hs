@@ -22,7 +22,7 @@ data Response = Response
 	} deriving (Show, Data, Typeable)
 
 pattern :: String
-pattern = "^([0-9+-/*().^]|sin|cos|tan|asin|acos|atan|sqrt)*$"
+pattern = "^([0-9+-/*().^]|sin|cos|tan|asin|acos|atan|sqrt|log|pi|abs)*$"
 
 myConnectionInfo :: R.ConnectInfo
 myConnectionInfo = R.defaultConnectInfo
