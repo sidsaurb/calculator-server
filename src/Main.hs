@@ -22,7 +22,7 @@ data Response = Response
 	} deriving (Show, Data, Typeable)
 
 pattern :: String
-pattern = "^([0-9+-/*().^]|sin|cos|tan|asin|acos|atan|sqrt|log|pi|abs)*$"
+pattern = "^([0-9+-/*().^]|sin|cos|tan|asin|acos|atan|sqrt|log|pi|abs|exp|sinh|cosh|tanh|asinh|acosh|atanh)*$"
 
 myConnectionInfo :: R.ConnectInfo
 myConnectionInfo = R.defaultConnectInfo
@@ -39,11 +39,11 @@ evalExp exp = do
 returnResult :: String -> String -> IO Response
 returnResult [] exp = case (exp =~ pattern) of True -> do
                                                         a <- runInterpreter $ setImports ["Prelude"] >> eval exp
-                                                        let (error, success, result) = case a of Left _ -> ("Syntax Error", False, "")
+                                                        let (error, success, result) = case a of Left _ -> ("Syntax error!", False, "")
 		                                                                                 Right b -> ("", True, b)
                                                         addToCache success exp result
                                                         return $ Response success False result error
-                                               False -> return $ Response False False "" "Insanitary Input"
+                                               False -> return $ Response False False "" "Syntax error!"
 returnResult x _ = return $ Response True True x ""
 
 addToCache :: Bool -> String -> String -> IO (Either R.Reply R.Status)
