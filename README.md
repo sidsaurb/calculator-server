@@ -4,3 +4,5 @@
 
 This is a Haskell based web server build with Happstack. It takes mathematical expressions as input and return evaluated results as output.
 The corresponding android client can be found [here](https://github.com/sidsaurb/calculator-android)
+
+Instructions to install: Go to root directory and run `cabal install`
